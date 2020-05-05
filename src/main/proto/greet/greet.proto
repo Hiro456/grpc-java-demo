@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package greet;
+
+option java_package = "com.proto.greet";
+option java_multiple_files = true;
+
+message Greeting {
+    string first_name = 1;
+    string last_name = 2;
+}
+
+//for unary API
+message GreetRequest {
+    Greeting greeting =1;
+}
+message GreetResponse{
+    string result = 1;
+}
+
+
+//for server streaming API
+message GreetManyTimeRequest {
+    Greeting greeting =1;
+}
+message GreetManyTimeResponse {
+    string result = 1;
+}
+
+
+//for Client streaming API
+message LongGreetRequest{
+    Greeting greeting = 1;
+}
+message LongGreetResponse {
+    string result = 1;
+}
+
+
+//for the Bi-Streaming
+message GreetEveryOneRequest{
+    Greeting greeting = 1;
+}
+message GreetEveryOneResponse{
+    string result = 1;
+}
+
+
+message GreetWithDeadlineRequest{
+    Greeting greeting = 1;
+}
+message GreetWithDeadlineResponse{
+    string result = 1;
+}
+
+
+service GreetService { //service + nameOfTheService
+    //Unary
+    rpc Greet(GreetRequest) returns (GreetResponse) {};
+
+    //Server streaming
+    rpc GreetManyTime(GreetManyTimeRequest) returns (stream GreetManyTimeResponse) {};
+
+    //Client streaming
+    rpc LongGreet(stream LongGreetRequest) returns (LongGreetResponse) {};
+
+    rpc GreetEveryOne (stream GreetEveryOneRequest) returns (stream GreetEveryOneResponse) {};
+
+    //thi rpc complete on no less tha 300 ms
+    rpc GreetWithDeadline(GreetWithDeadlineRequest) returns (GreetWithDeadlineResponse) {};
+}

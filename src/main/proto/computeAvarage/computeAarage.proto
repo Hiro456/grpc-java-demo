@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package computeAvarage;
+
+option java_package = "com.github.computeAvarage";
+option java_multiple_files = true;
+
+message InputSeries {
+    int32 inputNumber = 1;
+}
+
+message Avarage {
+    double avarage = 1;
+}
+
+service AvarageService {
+    rpc ComputeAvarage(stream InputSeries) returns (Avarage);
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package factorization;
+
+option java_package = "com.proto.primedcomp";
+option java_multiple_files = true;
+
+message InputNumber {
+    int32 numberToDecompose = 1;
+}
+
+message OutputNumbers {
+    int32 decoposedNumbers = 1;
+}
+
+service Decomposition {
+    rpc Decompose(InputNumber) returns (stream OutputNumbers) {};
+}

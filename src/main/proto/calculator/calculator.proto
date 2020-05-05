@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package sumCalc;
+
+option java_package = 'com.proto.sumProto';
+option java_multiple_files = true;
+
+message SumRequest {
+    int32 first_number = 1;
+    int32 second_number = 2;
+}
+
+message Calculations{
+    int32 sum_response = 1;
+    int32 molt_response = 2;
+}
+
+message SquareRootRequest {
+    int32 number = 1;
+}
+message SquareRootResponse{
+    double square_number = 1;
+}
+
+service CalculatorService{
+    rpc Calc(SumRequest) returns (Calculations) {};
+
+    //thi rpc go trough an exeption if  the sent number is negative
+    rpc SquareRoot(SquareRootRequest) returns (SquareRootResponse) {};
+}
